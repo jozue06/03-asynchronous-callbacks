@@ -1,3 +1,5 @@
+'use strict';
+
 const read = require('../lib/reader');
 
 describe('Reader Module', () => {
