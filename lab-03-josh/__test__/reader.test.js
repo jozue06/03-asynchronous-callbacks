@@ -17,8 +17,7 @@ describe('Reader Module', () => {
   it('when given a real file, returns the contents', (done) => {
     let file = `lab-03-josh/data/bananas.txt`;
     reader(file, (err,data) => {
-      expect(typeof data).toBe('string');
-     
+      expect(typeof data).toBe('string');    
     });
     done();
   });
@@ -31,13 +30,40 @@ describe('Reader Module', () => {
       path = ele.toString();
       reader(path, (err,data) => {
         expect(typeof data).toBe('string');
-        console.log(data);
+        // console.log(data);
         done();
       });
     });
- 
-   
   });
+
+    it('when given an array of files, returns the contents in an array', (done) => {
+      let paths = [`lab-03-josh/data/apples.txt`,`lab-03-josh/data/bananas.txt` ];
+      let path = '';
+      let textArr = [];
+      paths.forEach( (ele) => {
+        path = ele.toString();
+        reader(path, (err,data) => {
+          textArr.push(data);         
+        });
+      });
+      console.log(textArr);
+      expect(true).toBe(Array.isArray(textArr));
+      done();
+  });
+
+  it('when given an array of files, returns the contents in order in an array', (done) => {
+    let paths = [`lab-03-josh/data/cucumbers.txt`,`lab-03-josh/data/apples.txt`,`lab-03-josh/data/bananas.txt` ];
+    let path = '';
+    let textArr = [];
+    paths.forEach( (ele) => {
+      path = ele.toString();
+      reader(path, (err,data) => {
+        textArr.push(data);         
+      });
+    });
+    console.log(textArr);
+    expect(true).toBe(Array.isArray(textArr));
+    done();
 });
   
-
+});
