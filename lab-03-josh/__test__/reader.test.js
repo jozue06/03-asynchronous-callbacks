@@ -15,16 +15,29 @@ describe('Reader Module', () => {
   });
   
   it('when given a real file, returns the contents', (done) => {
-    let file = `lab-03-josh/data/bananas.txt`;//?
+    let file = `lab-03-josh/data/bananas.txt`;
     reader(file, (err,data) => {
-      console.log(err);
-      console.log(data);
-      expect(typeof data).toBe('string');//?
+      expect(typeof data).toBe('string');
      
-      done();
     });
+    done();
   });
 
+  it('when given an array of files, returns the contents', (done) => {
+    let paths = [`lab-03-josh/data/apples.txt`,`lab-03-josh/data/bananas.txt` ];
+    let path = '';
+    paths.forEach( (ele) => {
+      
+      path = ele.toString();
+      reader(path, (err,data) => {
+        expect(typeof data).toBe('string');
+        console.log(data);
+        done();
+      });
+    });
+ 
+   
+  });
 });
   
 
