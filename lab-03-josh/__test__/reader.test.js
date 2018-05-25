@@ -44,15 +44,15 @@ describe('Reader Module', () => {
   it('when given an array of files, returns the contents in order in an array regardless of size/time it takes', (done) => {
     let paths = [`lab-03-josh/data/cucumbers.txt`, `lab-03-josh/data/apples.txt`, `lab-03-josh/data/bananas.txt`];
     let textArr = [];
-    reader(paths, (err, data) => {
-      textArr.push(data);
-      expect(textArr[0]).toContain('cucumbers');
-    });
+    setTimeout(
+      reader(paths, (err, data) => {
+        textArr.push(data.toString());
+        expect(textArr[0]).toContain('cucumbers');
+      }),200); 
     done();
-
   });
 
-  it('when given an array of files, returns the contents in order in an array regardless of size/time it takes', (done) => {
+  it('when given an array of files, returns error from bad path in array', (done) => {
     let paths = [`lab-03-josh/data/cucumbssrs.txt`, `lab-03-josh/data/apples.txt`, `lab-03-josh/data/bananas.txt`];
     let textArr = [];
     reader(paths, (err, data) => {
@@ -61,4 +61,6 @@ describe('Reader Module', () => {
     });
     done();
   });
+
+
 });
