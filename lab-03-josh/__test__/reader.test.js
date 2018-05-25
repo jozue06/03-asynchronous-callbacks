@@ -5,9 +5,7 @@ const reader = require('../lib/reader.js');
 describe('Reader Module', () => {
 
   it('when given a bad file, returns an error', (done) => {
-
-    let file = `${__dirname}/../../data/bad.txt`;
-
+    let file = [`${__dirname}/../../data/bad.txt`];
     reader(file, (err) => {
       expect(err).toBeDefined();
     });
@@ -15,37 +13,29 @@ describe('Reader Module', () => {
   });
 
   it('when given a real file, returns the contents', (done) => {
-    let file = `lab-03-josh/data/bananas.txt`;
+    let file = [`lab-03-josh/data/bananas.txt`];
     reader(file, (err, data) => {
-      expect(typeof data).toBe('string');
+      const returns = data.toString();
+      expect(returns).toBe(data[0]);
     });
     done();
   });
 
   it('when given an array of files, returns the contents', (done) => {
     let paths = [`lab-03-josh/data/apples.txt`, `lab-03-josh/data/bananas.txt`];
-    let path = '';
-    paths.forEach((ele) => {
-
-      path = ele.toString();
-      reader(path, (err, data) => {
-        expect(typeof data).toBe('string');
-        // console.log(data);
-        done();
-      });
+    reader(paths, (err, data) => {
+      const returns = data.toString();
+      expect(typeof returns).toBe('string');
+      done();
     });
   });
 
+
   it('when given an array of files, returns the contents in an array', (done) => {
     let paths = [`lab-03-josh/data/apples.txt`, `lab-03-josh/data/bananas.txt`];
-    let path = '';
     let textArr = [];
-    paths.forEach((ele) => {
-      path = ele.toString();
-      reader(path, (err, data) => {
-        textArr.push(data);
-        // console.log(textArr);
-      });
+    reader(paths, (err, data) => {
+      textArr.push(data);
     });
     expect(true).toBe(Array.isArray(textArr));
     done();
@@ -53,36 +43,22 @@ describe('Reader Module', () => {
 
   it('when given an array of files, returns the contents in order in an array regardless of size/time it takes', (done) => {
     let paths = [`lab-03-josh/data/cucumbers.txt`, `lab-03-josh/data/apples.txt`, `lab-03-josh/data/bananas.txt`];
-    let path = '';
     let textArr = [];
-    setTimeout(
-      paths.forEach((ele) => {
-        path = ele.toString();
-        reader(path, (err, data) => {
-          textArr.push(data);
-          // console.log(textArr);
-          expect(textArr[0]).toContain('cucumbers');
-        });
-        done();
-      }), 200);
+    reader(paths, (err, data) => {
+      textArr.push(data);
+      expect(textArr[0]).toContain('cucumbers');
+    });
+    done();
 
   });
 
   it('when given an array of files, returns the contents in order in an array regardless of size/time it takes', (done) => {
     let paths = [`lab-03-josh/data/cucumbssrs.txt`, `lab-03-josh/data/apples.txt`, `lab-03-josh/data/bananas.txt`];
-    let path = '';
     let textArr = [];
-    setTimeout(
-      paths.forEach((ele) => {
-        path = ele.toString();
-        reader(path, (err, data) => {
-          textArr.push(data);
-          // console.log(textArr);
-          expect(err).not.toBeUndefined();
-        });
-        done();
-      }), 200);
-
+    reader(paths, (err, data) => {
+      textArr.push(data);
+      expect(err).not.toBeUndefined();
+    });
+    done();
   });
-
 });
