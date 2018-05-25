@@ -51,7 +51,7 @@ describe('Reader Module', () => {
     done();
   });
 
-  xit('when given an array of files, returns the contents in order in an array regardless of size/time it takes', (done) => {
+  it('when given an array of files, returns the contents in order in an array regardless of size/time it takes', (done) => {
     let paths = [`lab-03-josh/data/cucumbers.txt`, `lab-03-josh/data/apples.txt`, `lab-03-josh/data/bananas.txt`];
     let path = '';
     let textArr = [];
