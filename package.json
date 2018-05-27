@@ -1,0 +1,21 @@
+{
+  "name": "data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__test__"
+  },
+  "scripts": {
+    "test": "jest --coverage --verbose",
+    "test-watch": "jest --watchAll --coverage --verbose",
+    "lint": "eslint **/*.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^4.19.1",
+    "jest": "^22.4.4"
+  }
+}
